@@ -1,0 +1,167 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#101827">
+  <meta name="description" content="RISHI Scientific Calculator">
+  <title>RISHI Scientific Calculator</title>
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" href="icon-192.png">
+  <link rel="manifest" href="manifest.json">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/13.2.0/math.js"></script>
+  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+</head>
+
+<body>
+  <div class="app-shell">
+
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark">R</div>
+        <div>
+          <h1>RISHI</h1>
+          <p>SCIENTIFIC CALCULATOR</p>
+        </div>
+      </div>
+      <div class="top-status">SCIENTIFIC MODE</div>
+    </header>
+
+    <nav class="tabs">
+      <button class="tab active" data-page="calculator">Calculator</button>
+      <button class="tab" data-page="graph">Graph Plotter</button>
+    </nav>
+
+    <main>
+      <section id="calculator" class="page active">
+        <div class="calculator-card">
+
+          <div class="display-panel">
+            <div class="display-top">
+              <span>EXPRESSION</span>
+              <button id="angleMode" class="mode-button">DEG</button>
+            </div>
+
+            <input
+              id="display"
+              type="text"
+              value=""
+              placeholder="0"
+              readonly
+              inputmode="none"
+              autocomplete="off"
+              autocorrect="off"
+              spellcheck="false"
+              aria-label="Calculator display"
+            >
+
+            <div class="result-line">
+              <span>RESULT</span>
+              <strong id="result">0</strong>
+            </div>
+          </div>
+
+          <div class="keypad">
+            <button class="key function" data-action="clear">AC</button>
+            <button class="key function" data-action="delete">DEL</button>
+            <button class="key function" data-value="(">(</button>
+            <button class="key function" data-value=")">)</button>
+            <button class="key operator" data-value="/">÷</button>
+
+            <button class="key function" data-value="sin(">sin</button>
+            <button class="key function" data-value="cos(">cos</button>
+            <button class="key function" data-value="tan(">tan</button>
+            <button class="key function" data-value="sqrt(">√</button>
+            <button class="key operator" data-value="^">xʸ</button>
+
+            <button class="key function" data-value="log(">log</button>
+            <button class="key function" data-value="ln(">ln</button>
+            <button class="key function" data-value="π">π</button>
+            <button class="key function" data-value="e">e</button>
+            <button class="key operator" data-value="*">×</button>
+
+            <button class="key number" data-value="7">7</button>
+            <button class="key number" data-value="8">8</button>
+            <button class="key number" data-value="9">9</button>
+            <button class="key function" data-value="%">%</button>
+            <button class="key operator" data-value="-">−</button>
+
+            <button class="key number" data-value="4">4</button>
+            <button class="key number" data-value="5">5</button>
+            <button class="key number" data-value="6">6</button>
+            <button class="key function" data-value="!">x!</button>
+            <button class="key operator" data-value="+">+</button>
+
+            <button class="key number" data-value="1">1</button>
+            <button class="key number" data-value="2">2</button>
+            <button class="key number" data-value="3">3</button>
+            <button class="key function" data-value="Ans">Ans</button>
+            <button class="key equals" data-action="calculate">=</button>
+
+            <button class="key number zero" data-value="0">0</button>
+            <button class="key number" data-value=".">.</button>
+            <button class="key function" data-value="^2">x²</button>
+            <button class="key function" data-value="1/(">1/x</button>
+          </div>
+
+          <div class="calculator-footer">
+            <span>RISHI SCIENTIFIC</span>
+            <span>PRECISION • SIMPLICITY</span>
+          </div>
+        </div>
+
+        <section class="history-panel">
+          <div class="section-heading">
+            <h2>Calculation History</h2>
+            <button id="clearHistory" class="text-button">Clear history</button>
+          </div>
+          <div id="historyList" class="history-list">
+            <p class="empty-history">Your calculations will appear here.</p>
+          </div>
+        </section>
+      </section>
+
+      <section id="graph" class="page">
+        <div class="graph-card">
+          <div class="section-heading">
+            <div>
+              <h2>Function Graph</h2>
+              <p>Plot mathematical functions using x.</p>
+            </div>
+          </div>
+
+          <label for="equation">Enter equation</label>
+          <div class="equation-row">
+            <span>y =</span>
+            <input id="equation" type="text" placeholder="e.g. x^2 or sin(x)">
+            <button id="plotButton">Plot</button>
+          </div>
+
+          <div class="range-row">
+            <div>
+              <label for="xMin">X minimum</label>
+              <input id="xMin" type="number" value="-10">
+            </div>
+            <div>
+              <label for="xMax">X maximum</label>
+              <input id="xMax" type="number" value="10">
+            </div>
+          </div>
+
+          <p id="graphError" class="graph-error"></p>
+          <div id="plot" class="plot-area"></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="page-footer">
+      RISHI SCIENTIFIC CALCULATOR · MADE FOR LEARNING
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

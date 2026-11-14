@@ -1,0 +1,461 @@
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --background: #101827;
+  --panel: #172235;
+  --text: #f4f7ff;
+  --muted: #aab6c9;
+  --accent: #64d9cf;
+  --border: rgba(255,255,255,0.13);
+}
+
+body {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top left, #233b58 0, transparent 38%),
+    #101827;
+  color: var(--text);
+  font-family: Inter, "Segoe UI", Arial, sans-serif;
+}
+
+button, input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.app-shell {
+  width: min(1120px, 94%);
+  margin: auto;
+  padding: 22px 0 18px;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 25px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand-mark {
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #64d9cf, #4a91d9);
+  color: #10202e;
+  font-size: 27px;
+  font-weight: 900;
+}
+
+.brand h1 {
+  font-size: 22px;
+  letter-spacing: 3px;
+}
+
+.brand p, .top-status, .calculator-footer, .display-top {
+  color: var(--muted);
+  font-size: 10px;
+  letter-spacing: 1.8px;
+}
+
+.top-status {
+  border: 1px solid var(--border);
+  border-radius: 30px;
+  padding: 9px 13px;
+}
+
+.tabs {
+  display: flex;
+  gap: 8px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 22px;
+}
+
+.tab {
+  background: transparent;
+  color: var(--muted);
+  border: 0;
+  border-bottom: 2px solid transparent;
+  padding: 12px 18px;
+  font-weight: 650;
+}
+
+.tab.active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+.page {
+  display: none;
+}
+
+.page.active {
+  display: block;
+}
+
+.calculator-card {
+  width: min(620px, 100%);
+  margin: 0 auto;
+  padding: 18px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.22);
+  border-radius: 23px;
+
+  /* Your photo is deliberately visible behind the keypad. */
+  background-image:
+    linear-gradient(rgba(8, 16, 29, 0.30), rgba(8, 16, 29, 0.38)),
+    url("./my-photo.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  box-shadow: 0 22px 60px rgba(0,0,0,0.32);
+}
+
+.display-panel {
+  padding: 17px 18px;
+  margin-bottom: 14px;
+  border: 1px solid rgba(255,255,255,0.19);
+  border-radius: 15px;
+  background: rgba(8, 15, 27, 0.76);
+  backdrop-filter: blur(8px);
+}
+
+.display-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mode-button {
+  background: rgba(100,217,207,0.16);
+  color: var(--accent);
+  border: 1px solid rgba(100,217,207,0.35);
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+#display {
+  width: 100%;
+  margin: 14px 0 9px;
+  padding: 5px 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: white;
+  text-align: right;
+  font-size: clamp(25px, 5vw, 38px);
+  font-weight: 500;
+  caret-color: transparent;
+  user-select: none;
+}
+
+#display::placeholder {
+  color: rgba(255,255,255,0.65);
+}
+
+.result-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid var(--border);
+  padding-top: 11px;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.result-line strong {
+  color: var(--accent);
+  font-size: 20px;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+  text-align: right;
+}
+
+.keypad {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 9px;
+}
+
+.key {
+  min-width: 0;
+  min-height: 57px;
+  border: 1px solid rgba(255,255,255,0.19);
+  border-radius: 12px;
+  color: white;
+  background: rgba(10, 20, 35, 0.58);
+  backdrop-filter: blur(5px);
+  font-size: 17px;
+  font-weight: 650;
+  transition: background 0.15s, transform 0.15s;
+  touch-action: manipulation;
+  user-select: none;
+}
+
+.key:hover {
+  background: rgba(255,255,255,0.18);
+}
+
+.key:active {
+  transform: scale(0.96);
+}
+
+.key.number {
+  background: rgba(20, 33, 51, 0.66);
+}
+
+.key.function {
+  color: #8ce6df;
+  background: rgba(12, 46, 55, 0.72);
+  font-size: 14px;
+}
+
+.key.operator {
+  color: #ffd38a;
+  background: rgba(74, 49, 25, 0.76);
+  font-size: 21px;
+}
+
+.key.equals {
+  color: #10202e;
+  background: linear-gradient(135deg, #79e8d5, #62b9e8);
+  border: 0;
+  font-size: 23px;
+}
+
+.key.zero {
+  grid-column: span 1;
+}
+
+.calculator-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 16px 3px 2px;
+  font-size: 9px;
+}
+
+.history-panel {
+  width: min(620px, 100%);
+  margin: 22px auto 0;
+  padding: 18px;
+  border: 1px solid var(--border);
+  border-radius: 17px;
+  background: rgba(23,34,53,0.86);
+}
+
+.section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 15px;
+}
+
+.section-heading h2 {
+  font-size: 17px;
+}
+
+.section-heading p {
+  color: var(--muted);
+  font-size: 13px;
+  margin-top: 5px;
+}
+
+.text-button {
+  border: 0;
+  background: transparent;
+  color: var(--accent);
+  font-size: 12px;
+}
+
+.history-list {
+  display: grid;
+  gap: 8px;
+}
+
+.history-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 11px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.055);
+}
+
+.history-expression {
+  color: var(--muted);
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+
+.history-result {
+  color: var(--accent);
+  font-weight: 700;
+  text-align: right;
+}
+
+.empty-history {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.graph-card {
+  padding: 22px;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: rgba(23,34,53,0.94);
+}
+
+.graph-card label {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+  margin: 12px 0 7px;
+}
+
+.equation-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.equation-row span {
+  color: var(--accent);
+  font-weight: 800;
+}
+
+.equation-row input, .range-row input {
+  width: 100%;
+  min-width: 0;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  padding: 12px;
+  background: #0f1a2b;
+  color: white;
+  outline: none;
+}
+
+.equation-row button {
+  border: 0;
+  border-radius: 9px;
+  padding: 12px 19px;
+  background: var(--accent);
+  color: #10202e;
+  font-weight: 800;
+}
+
+.range-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.plot-area {
+  width: 100%;
+  min-height: 390px;
+  margin-top: 18px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: white;
+}
+
+.graph-error {
+  color: #ff9c9c;
+  font-size: 13px;
+  margin-top: 10px;
+}
+
+.page-footer {
+  padding: 25px 0 5px;
+  color: var(--muted);
+  text-align: center;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+}
+
+@media (max-width: 600px) {
+  .app-shell {
+    width: 94%;
+    padding-top: 15px;
+  }
+
+  .topbar {
+    margin-bottom: 17px;
+  }
+
+  .top-status {
+    font-size: 8px;
+    padding: 7px 9px;
+  }
+
+  .calculator-card {
+    padding: 11px;
+    border-radius: 17px;
+  }
+
+  .keypad {
+    gap: 6px;
+  }
+
+  .key {
+    min-height: 52px;
+    border-radius: 9px;
+    font-size: 15px;
+  }
+
+  .key.function {
+    font-size: 12px;
+  }
+
+  .display-panel {
+    padding: 13px;
+  }
+
+  .history-panel, .graph-card {
+    padding: 14px;
+  }
+
+  .plot-area {
+    min-height: 310px;
+  }
+
+  .calculator-footer {
+    font-size: 7px;
+  }
+}
+
+@media (max-width: 360px) {
+  .key {
+    min-height: 46px;
+    font-size: 13px;
+  }
+
+  .key.function {
+    font-size: 10px;
+  }
+
+  .keypad {
+    gap: 5px;
+  }
+}
